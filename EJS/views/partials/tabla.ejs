@@ -1,0 +1,32 @@
+<h1 style="color: blue">
+    <%= titulo %>
+</h1>
+<br />
+
+<% if(productos.length !== 0) { %>
+    <div class="table-responsive">
+        <table class="table table-dark">
+            <tr style="color: yellow;">
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+            </tr>
+            <% for (const producto in productos ) { %>
+                <tr>
+                    <td>
+                        <%= productos[producto].nombre %>
+                    </td>
+                    <td>
+                        <%= productos[producto].precio %>
+                    </td>
+                    <td>
+                        <img src="<%= productos[producto].foto_URL %>" alt="<%= productos[producto].nombre %>" width="60" height="60">
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+    <% } else{ %>
+        <h3 style="color: black">No hay productos</h3>
+        <% }%>
+            <button class="btn btn-success mt-3" type="button" onclick="location.href='<%= button_dir %>'"><%= button_text %></button>

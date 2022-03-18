@@ -17,7 +17,6 @@ app.engine(
 app.set('view engine', 'hbs')
 app.set('views', './views')
 
-
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${server.address().port}`)
 })
@@ -40,13 +39,28 @@ app.post('/productos', (req, res) => {
 
 app.get('/productos', (req, res) => {
     let str_table = ''
-    productos.forEach(producto => {
-        str_table = str_table.concat(`<tr>
-        <td>${producto.nombre}</td>
-        <td>${producto.precio}</td>
-        <td><img src="${producto.foto_URL}" alt="${producto.nombre}" width="60" height="60"></td>
-        </tr>`)
-    });
+    if (productos.length !== 0) {
+        str_table = `<div class="table-responsive">
+                        <table class="table table-dark">
+                        <tr style="color: yellow;">
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Imagen</th>
+                        </tr>`
+        productos.forEach(producto => {
+            str_table = str_table.concat(`
+            <tr>
+                <td>${producto.nombre}</td>
+                <td>${producto.precio}</td>
+                <td><img src="${producto.foto_URL}" alt="${producto.nombre}" width="60" height="60"></td>
+            </tr>`)
+        });
+        str_table = str_table.concat(`
+            </table>
+        </div>`);
+    } else {
+        str_table = '<h3 style="color: black">No hay productos</h3>'
+    }
     res.render('tabla', {
         titulo: 'Lista de Productos',
         button_dir: '/',

@@ -1,0 +1,16 @@
+<header>
+    <%- include('./partials/encabezado.ejs') %>
+</header>
+
+<body>
+    <div class="container mt-3">
+        <div class="jumbotron">
+            <% if(page == 0) { %>
+                <%- include('./partials/form.ejs') %>
+                    <% } else if (page == 1){ %>
+                        <%- include('./partials/tabla.ejs') %>
+                            <% } %>
+        </div>
+    </div>
+</body>
+<%- include('./partials/pie.ejs') %>
