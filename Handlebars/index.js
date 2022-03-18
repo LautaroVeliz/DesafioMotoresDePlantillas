@@ -1,7 +1,7 @@
 import express from 'express'
 import handlebars from 'express-handlebars'
-
 const app = express()
+const PORT = 8080
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -10,16 +10,14 @@ app.engine(
     'hbs',
     handlebars({
         extname: '.hbs',
-        defaultLayout: 'index.hbs',
-        //layoutsDir: __dirname + "/views/layouts",
-        //partialsDir: __dirname + "/views/partials/"
+        defaultLayout: 'index.hbs'
     })
 )
 
 app.set('view engine', 'hbs')
 app.set('views', './views')
 
-const PORT = 8080
+
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${server.address().port}`)
 })
@@ -39,6 +37,7 @@ app.post('/productos', (req, res) => {
     productos.push(req.body)
     res.redirect('/')
 })
+
 app.get('/productos', (req, res) => {
     let str_table = ''
     productos.forEach(producto => {
